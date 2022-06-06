@@ -5,6 +5,9 @@ import java.io.Serializable
 
 data class Model(
 
+    @SerializedName("id")
+    val id : Int,
+
     @SerializedName("theater_name")
     val name : String,
 

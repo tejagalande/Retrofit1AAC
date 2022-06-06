@@ -3,14 +3,14 @@ package com.example.retrofit1aac
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit1aac.databinding.ItemsBinding
 
-class CustomAdapter(val data : ArrayList<Model>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+class CustomAdapter(var data : ArrayList<Model>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
     lateinit var binding: ItemsBinding
 
     class CustomViewHolder(private val binding: ItemsBinding) : RecyclerView.ViewHolder(binding.root) {
-
 
         fun set(model: Model){
 
@@ -19,14 +19,11 @@ class CustomAdapter(val data : ArrayList<Model>) : RecyclerView.Adapter<CustomAd
             binding.textViewPhone.text= model.phone.toString()
         }
 
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
 
         binding = ItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-
         return CustomViewHolder(binding)
     }
 
@@ -47,6 +44,15 @@ class CustomAdapter(val data : ArrayList<Model>) : RecyclerView.Adapter<CustomAd
         }
     }
 
+
+    fun setData(newList : List<Model>){
+
+        val diffUtil = MyDiffUtil(data, newList)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
+        data = newList as ArrayList<Model>
+        diffUtilResult.dispatchUpdatesTo(this)
+
+    }
 }
 
 

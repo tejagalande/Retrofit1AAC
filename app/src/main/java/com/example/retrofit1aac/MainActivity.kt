@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                             binding.swipeLayout.isRefreshing = false
                             setData(data)
 
+
                         }
                     }
 
@@ -90,8 +91,9 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext,"Error occurred",Toast.LENGTH_SHORT).show()
                         adapter.apply {
 
-                            listData.clear()
-                            notifyDataSetChanged()
+//                            listData.clear()
+//                            notifyDataSetChanged()
+                            setData(listData)
                         }
                     }
                 }
@@ -103,9 +105,10 @@ class MainActivity : AppCompatActivity() {
         adapter.apply {
             //setData(data)
 
-            listData.clear()
-            listData.addAll(data)
-            notifyDataSetChanged()
+            setData(data)
+            //listData.clear()
+            //listData.addAll(data)
+            //notifyDataSetChanged()
         }
     }
 }
